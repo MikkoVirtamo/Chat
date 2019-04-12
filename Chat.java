@@ -14,7 +14,7 @@ public class Chat {
     public static void main(String[] args) throws IOException {
 
         System.out.println("Chat Client!!\nType help for instructions\n");
-        port = Integer.parseInt(args[0]); // port number to be specified when program is run later
+        port = Integer.parseInt(args[0]); // port number from command line
         InetAddress addr = InetAddress.getLocalHost();
         String host = addr.getHostAddress();
 
@@ -34,27 +34,25 @@ public class Chat {
         Scanner in = new Scanner(System.in); // just used to read from console
         String s;
         String[] input;
-        //input[0] = "";
-        //input[1] = "";
-        //input[2] = "";
+
 
         do{
-           // input[2] = "BLANK";
+
         s = in.nextLine();
         input = s.split(" ", 3);
 
             if("myip".equalsIgnoreCase(input[0])) {
-
+                //prints ip address to console
                 System.out.print("Your IP Address: ");
                 System.out.println(sockets.get(0).getLocalAddress().toString());
 
             } else if ("myport".equalsIgnoreCase(input[0])) {
+                //shows port that you wrote on command line
                 System.out.print("Port Number: ");
                 System.out.println(port);
             } else if ("connect".equalsIgnoreCase(input[0])) {
-                //if(input[2].equals("BLANK")){ System.out.println("Format of request incorrect");
-                //return;
-                //}
+                //connects to another server
+                //have to specify ipaddres and port number
                 System.out.println("Connecting");
                 System.out.println(input[1]);
                 System.out.println(Integer.parseInt(input[2]));
@@ -63,12 +61,14 @@ public class Chat {
                 System.out.println("Connected");
 
             } else if ("list".equalsIgnoreCase(input[0])) {
+                //shows all currently available connections
                 System.out.println("List");
                 for(int i = 0; i < sockets.size(); i++)
                 {
                     System.out.println((i+1) + ". IP " + sockets.get(i).getLocalAddress().toString() + " Port " + sockets.get(i).getPort());
                 }
             } else if ("terminate".equalsIgnoreCase(input[0])) {
+                //terminate connection from your own list
                 if(Integer.parseInt(input[1]) <= sockets.size()) {
                     System.out.print("Terminating: ");
                     System.out.println(sockets.get(Integer.parseInt(input[1]) - 1).getLocalAddress());
@@ -77,6 +77,7 @@ public class Chat {
                 else System.out.println("that connection doesn't exist");
 
             } else if ("send".equalsIgnoreCase(input[0])) {
+                //send message to ipaddress and port from specified connection in list
                 if(Integer.parseInt(input[1]) <= sockets.size()) {
                     outputStream = new DataOutputStream(sockets.get(Integer.parseInt(input[1]) - 1).getOutputStream());
                     outputStream.writeUTF(input[2]);
@@ -86,6 +87,7 @@ public class Chat {
 
 
             }else if ("help".equalsIgnoreCase(input[0])) {
+                //lists all possible choices
                 System.out.println("help -                             Display information about the available user interface options or command manual. \n");
                 System.out.println("myip -                             Display the IP address of this process.\n");
                 System.out.println("myport -                           helpDisplay the port on which this process is listening for incoming connections. \n");
@@ -112,6 +114,7 @@ public class Chat {
             }
 
         }while(!input[0].equalsIgnoreCase("exit"));
+        //if you type exit, the program exits
         System.exit(0);
     }
 

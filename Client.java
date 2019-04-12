@@ -29,7 +29,7 @@ public class Client extends Thread {
     private void connect() throws IOException, InterruptedIOException {
 
             Socket socket = new Socket(serverName, serverPort);
-            // creates new socket with the servername wich is localhost and the port specifie
+            // creates new socket with the servername which is localhost and the port specified
             inputStream = new DataInputStream(socket.getInputStream());
             outputStream = new DataOutputStream(socket.getOutputStream());
 
