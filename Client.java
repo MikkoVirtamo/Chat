@@ -36,7 +36,7 @@ public class Client extends Thread {
             while (true) try {
                 // read the message sent to this client
                 String msg = inputStream.readUTF();
-                System.out.println("Message form " + socket.getInetAddress() + " '" + msg + "'");
+                System.out.println("Message from " + socket.getInetAddress() + " '" + msg + "'");
             } catch (Exception e) {
                 System.out.println("Connection with " + socket.getInetAddress() + " is terminated");
                 break;
