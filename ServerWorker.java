@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.Scanner;
 
-
+//hi
 public class ServerWorker extends Thread {
 
     private List<Socket> sockets;
